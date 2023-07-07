@@ -4,6 +4,9 @@ import java.util.*;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.springrestapi.springrestapi.dao.PersonDao;
@@ -28,6 +31,15 @@ public class PersonServiceImpl implements PersonService {
 	public List<Person> getPersons() {
 		// TODO Auto-generated method stub
 		return personDao.findAll();
+	}
+	
+	@Override
+	public List<Person> getPersons(int pageNo, int pageSize) {
+		Pageable pageable = PageRequest.of(pageNo, pageSize);
+
+        Page<Person> persons = personDao.findAll(pageable);
+        List<Person> listOfPersons = persons.getContent();
+        return listOfPersons;
 	}
 
 	@Override
@@ -56,5 +68,4 @@ public class PersonServiceImpl implements PersonService {
 		Optional<Person> course = personDao.findById(personId);
 		personDao.delete(course.get());
 	}
-
 }

@@ -8,6 +8,8 @@ public interface PersonService {
 	
 	public List<Person> getPersons();
 	
+	public List<Person> getPersons(int pageNo, int pageSize);
+	
 	public Person getPerson(long personId);
 	
 	public Person addPerson(Person person);

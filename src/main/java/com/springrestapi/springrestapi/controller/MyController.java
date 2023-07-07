@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springrestapi.springrestapi.entities.Person;
@@ -25,15 +27,23 @@ public class MyController {
 	
 	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/persons")
-	public List<Person> getPersons(){
-		return this.personService.getPersons();
+	public List<Person> getPerson(@RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
+            @RequestParam(value = "pageSize", defaultValue = "5", required = false) int pageSize){
+		return this.personService.getPersons(pageNo, pageSize);
 	}
+	
+//	@CrossOrigin(origins = "http://localhost:4200")
+//	@GetMapping("/persons")
+//	public List<Person> getPersons(){
+//		return this.personService.getPersons();
+//	}
 	
 	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/persons/{personId}")
 	public Person getPerson(@PathVariable String personId){
 		return this.personService.getPerson(Long.parseLong(personId));
 	}
+	
 	
 	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/persons")
