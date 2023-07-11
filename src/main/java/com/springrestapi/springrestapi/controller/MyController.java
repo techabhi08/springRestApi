@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.springrestapi.springrestapi.entities.Person;
 import com.springrestapi.springrestapi.services.PersonService;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RestController
 public class MyController {
 	
