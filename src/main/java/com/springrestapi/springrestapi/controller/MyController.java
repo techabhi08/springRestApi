@@ -19,13 +19,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.springrestapi.springrestapi.entities.Person;
 import com.springrestapi.springrestapi.services.PersonService;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class MyController {
 	
 	@Autowired
 	private PersonService personService;
 	
-	@CrossOrigin(origins = "http://localhost:4200")
+//	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/persons")
 	public List<Person> getPerson(@RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
             @RequestParam(value = "pageSize", defaultValue = "5", required = false) int pageSize){
@@ -33,31 +34,25 @@ public class MyController {
 	}
 	
 //	@CrossOrigin(origins = "http://localhost:4200")
-//	@GetMapping("/persons")
-//	public List<Person> getPersons(){
-//		return this.personService.getPersons();
-//	}
-	
-	@CrossOrigin(origins = "http://localhost:4200")
 	@GetMapping("/persons/{personId}")
 	public Person getPerson(@PathVariable String personId){
 		return this.personService.getPerson(Long.parseLong(personId));
 	}
 	
 	
-	@CrossOrigin(origins = "http://localhost:4200")
+//	@CrossOrigin(origins = "http://localhost:4200")
 	@PostMapping("/persons")
 	public Person addPerson(@RequestBody Person person) {
 		return this.personService.addPerson(person);
 	}
 	
-	@CrossOrigin(origins = "http://localhost:4200")
+	
 	@PutMapping("/persons")
 	public Person editPerson(@RequestBody Person person) {
 		return this.personService.updatePerson(person);
 	}
 	
-	@CrossOrigin(origins = "http://localhost:4200")
+//	@CrossOrigin(origins = "http://localhost:4200")
 	@DeleteMapping("/persons/{personId}")
 	public ResponseEntity<HttpStatus> deleteCourse(@PathVariable String personId) {
 		try {
