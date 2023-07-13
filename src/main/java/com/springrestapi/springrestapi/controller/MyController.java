@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.springrestapi.springrestapi.entities.Person;
 import com.springrestapi.springrestapi.services.PersonService;
 
+import jakarta.validation.Valid;
+
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/persons")
@@ -39,13 +41,13 @@ public class MyController {
 	}
 	
 	@PostMapping("")
-	public ResponseEntity<Person> addPerson(@RequestBody Person person) {
+	public ResponseEntity<Person> addPerson(@Valid @RequestBody Person person) {
 		return new ResponseEntity<>(this.personService.addPerson(person), HttpStatus.CREATED);
 	}
 	
 	
 	@PutMapping("")
-	public Person editPerson(@RequestBody Person person) {
+	public Person editPerson(@Valid @RequestBody Person person) {
 		return this.personService.updatePerson(person);
 	}
 	
