@@ -21,45 +21,41 @@ import com.springrestapi.springrestapi.services.PersonService;
 
 @CrossOrigin(origins = "*")
 @RestController
+@RequestMapping("/persons")
 public class MyController {
 	
 	@Autowired
 	private PersonService personService;
 	
-//	@CrossOrigin(origins = "http://localhost:4200")
-	@GetMapping("/persons")
+	@GetMapping("")
 	public List<Person> getPerson(@RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,
-            @RequestParam(value = "pageSize", defaultValue = "5", required = false) int pageSize){
+            @RequestParam(value = "pageSize", defaultValue = "100", required = false) int pageSize){
 		return this.personService.getPersons(pageNo, pageSize);
 	}
 	
-//	@CrossOrigin(origins = "http://localhost:4200")
-	@GetMapping("/persons/{personId}")
+	@GetMapping("/{personId}")
 	public Person getPerson(@PathVariable String personId){
 		return this.personService.getPerson(Long.parseLong(personId));
 	}
 	
-	
-//	@CrossOrigin(origins = "http://localhost:4200")
-	@PostMapping("/persons")
-	public Person addPerson(@RequestBody Person person) {
-		return this.personService.addPerson(person);
+	@PostMapping("")
+	public ResponseEntity<Person> addPerson(@RequestBody Person person) {
+		return new ResponseEntity<>(this.personService.addPerson(person), HttpStatus.CREATED);
 	}
 	
 	
-	@PutMapping("/persons")
+	@PutMapping("")
 	public Person editPerson(@RequestBody Person person) {
 		return this.personService.updatePerson(person);
 	}
 	
-//	@CrossOrigin(origins = "http://localhost:4200")
-	@DeleteMapping("/persons/{personId}")
+	@DeleteMapping("/{personId}")
 	public ResponseEntity<HttpStatus> deleteCourse(@PathVariable String personId) {
 		try {
 			this.personService.deletePerson(Long.parseLong(personId));
 			return new ResponseEntity<>(HttpStatus.OK);
 		}catch(Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			throw e;
 		}
 	}
 }

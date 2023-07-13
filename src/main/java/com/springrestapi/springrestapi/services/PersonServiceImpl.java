@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.springrestapi.springrestapi.dao.PersonDao;
 import com.springrestapi.springrestapi.entities.Person;
+import com.springrestapi.springrestapi.exception.PersonNotFoundException;
 
 @Service
 public class PersonServiceImpl implements PersonService {
@@ -47,8 +48,9 @@ public class PersonServiceImpl implements PersonService {
 		Optional<Person> course = personDao.findById(personId);
 		if(course.isPresent()) {
 			return course.get();
+		}else {
+			throw new PersonNotFoundException("No person with this Roll Number is present.");
 		}
-		return null;
 	}
 
 	@Override
@@ -66,6 +68,10 @@ public class PersonServiceImpl implements PersonService {
 	@Override
 	public void deletePerson(long personId) {
 		Optional<Person> course = personDao.findById(personId);
-		personDao.delete(course.get());
+		if(course.isPresent()) {
+			personDao.delete(course.get());
+		}else {
+			throw new PersonNotFoundException("No Person with this Roll Number exists.");
+		}
 	}
 }
