@@ -3,6 +3,8 @@ package com.springrestapi.springrestapi.entities;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -13,6 +15,8 @@ public class Person {
 	
 	@Id
 	@NotNull(message = "Roll Number should not be empty")
+	@Min(10000)
+	@Max(9999999)
 	private long rollNo;
 	
 	@NotEmpty
