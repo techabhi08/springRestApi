@@ -10,6 +10,17 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
+/**
+ * 
+ * @author Abhinay Garg
+ * 
+ * This Person Entity class defines the blueprint for the Person object.
+ * Includes validation and constraints for the members of Person class. 
+ * The fields are private and follows the Spring Convention along with getters and setters for all variables
+ * 
+ * Annotations (@) - makes use of Jakarta Validation constraints class to apply validation logic for input values 
+ */
+
 @Entity
 public class Person {
 	

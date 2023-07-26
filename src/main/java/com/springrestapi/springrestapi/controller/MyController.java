@@ -21,13 +21,37 @@ import com.springrestapi.springrestapi.services.PersonService;
 
 import jakarta.validation.Valid;
 
+/**
+ * @author Abhinay Garg
+ * 
+ * The controller class is implemented to handle the API request calls 
+ * and further the calls are processed by passing the calls to service layer using methods.
+ * 
+ * CrossOrigin ("*") - Allows request from all the URLs, 
+ * helps to avoid the CORS error when trying to access from different host, localhost:4200 in this case.
+ * 
+ * @RequestMapping is used to make sure that all the API calls are routed through /persons.
+**/
+
 @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/persons")
 public class MyController {
 	
+	/** 
+	 * Including the person service, to work with core logic. 
+	 **/
+	
 	@Autowired
 	private PersonService personService;
+	
+	/**
+	 * Mappings using the Annotations(@) to handle the API calls from the client.
+	 * GetMapping - Used to fetch data from backend
+	 * PostMapping - used to insert Person data into data base
+	 * PutMapping - used to Update the Person data
+	 * DeleteMapping - used to delete a particular person
+	 **/
 	
 	@GetMapping("")
 	public List<Person> getPerson(@RequestParam(value = "pageNo", defaultValue = "0", required = false) int pageNo,

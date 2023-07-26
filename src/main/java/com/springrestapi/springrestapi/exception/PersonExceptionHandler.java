@@ -10,6 +10,17 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.validation.FieldError;
 
+/**
+ * 
+ * @author Abhinay Garg
+ *
+ * PersonExceptionHandler is the main Handler which is responsible for handling the exception
+ * and throwing the custom error message or response back to the user.
+ * Here the service layer is using the Exception class to create a new Exception which can be of type
+ * PersonNotFound - which is used in put and delete function calls or
+ * MethodArgumentNotValid - which is used for validation of the request input fields.
+ */
+
 @RestControllerAdvice
 public class PersonExceptionHandler {
 	
